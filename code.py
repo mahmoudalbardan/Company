@@ -12,7 +12,7 @@ from collections import Counter
 
 
 
-path = "pop_SG_sample_GT_disaggregated.csv"
+path = "pop_SG_sample_GT_disaggregated.csv" # MUST CHANGE TO DATASET PATH OR NAME
 dataframe = pd.read_csv(path)
 
 # check for nan values
