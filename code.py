@@ -9,10 +9,9 @@ import pandas as pd
 from math import cos, asin, sqrt, pi
 import matplotlib.pyplot as plt
 from collections import Counter
-import descartes
-import geopandas as gpd
-from shapely.geometry import Point, Polygon
-sys.exit()
+
+
+
 path = "pop_SG_sample_GT_disaggregated.csv"
 dataframe = pd.read_csv(path)
 
@@ -26,12 +25,7 @@ print (dataframe.info())
 print (len(dataframe["agent"].unique())) # 100000 person in the dataset 
 
 
-# convert time 0 and time1 to datetime objects
-#dateframe["time0"] = pd.to_datetime(dataframe["time0"],format="%H:%M:%S")
-#dateframe["time1"] = pd.to_datetime(dataframe["time1"],format="%H:%M:%S")
-
-
-# distance in km
+# distance in km from two points
 def distance(lat1, lon1,
              lat2, lon2):
     """
@@ -42,7 +36,8 @@ def distance(lat1, lon1,
     a = 0.5 - cos((lat2-lat1)*p)/2 + cos(lat1*p) * cos(lat2*p) * (1-cos((lon2-lon1)*p))/2
     return 12742 * asin(sqrt(a))   
 
-# for each person we suppose he has home location and (work,school, university) location
+  
+# for each person we suppose he has home location and (work/school/university) location
 # we want to speficy the home location: the location in the night (after midnight until morning)
 # first we group rows of each agent
 
@@ -96,23 +91,21 @@ for j,gp in enumerate(gagent):
         continue
     list_of_dfs.append(df)
         
-new_dataframe = pd.concat(list_of_dfs)
-new_dataframe.to_pickle("new_dataframe")
-new_dataframe = pd.read_pickle("new_dataframe")
+new_dataframe = pd.concat(list_of_dfs) # creating the new dataframe that will be used to infer the information
+new_dataframe.to_csv("new_dataframe") # saving the new dataframe
+
     
 
 
-# Exploratory data analysis
+# Exploratory data analysis and visualization
 variables = ['agent', 'home_subzone', 
-       'home_lon', 'home_lat', 
-       'work_subzone',
-       'work_lon', 'work_lat',
-       'nb_subzones', 'time_at_work',
-       'distance_to_work', 'work_start_time', 
-       'work_end_time', 'time_to_work']
+             'home_lon', 'home_lat', 
+             'work_subzone',
+             'work_lon', 'work_lat',
+             'nb_subzones', 'time_at_work',
+             'distance_to_work', 'work_start_time', 
+             'work_end_time', 'time_to_work']
 
-var = "distance_to_work"
-y = new_dataframe[var].values.tolist()
 
 
 plt.figure()
@@ -149,79 +142,28 @@ plt.title("Work ending time (in hours) distribution")
 plt.show()
 
 
-    
+# creating google maps heatmap for living and working zones in singapore. 
+# I used IPython (to save the map) in google collab (because of the issue with my jupyter notebook)
+
+import gmaps
+import IPython 
+from ipywidgets.embed import embed_minimal_html
+
 home_locations = new_dataframe[["home_lat","home_lon"]]
 work_locations = new_dataframe[["work_lat","work_lon"]]
 work_locations.dropna(axis=0,inplace=True,how="any")
 
-
-map_name = "SGP_adm0.shp"
-mapfile = gpd.read_file(map_name)
-fig,ax = plt.subplots(figsize=(15,15))
-mapfile.plot(ax=ax,color="grey", alpha=0.3)
-
-geometry_home = [Point(xy) for xy in zip(home_locations["home_lon"],home_locations["home_lat"])]
-
-
-
-import pandas as pd
-from folium import Map
-from folium.plugins import HeatMap
+api_key = "AIzaSyA2b3hxqyl1U5EnDp0RgaE4njUhkvxGqf0" # google api_key that i created to get access to Singapore map from google
+gmaps.configure(api_key=api_key)
+fig0 = gmaps.figure()
+fig0.add_layer(gmaps.heatmap_layer(home_locations))
+fig0
+embed_minimal_html('home_heatmap.html', views=[fig0])
+IPython.display.HTML(filename="/content/home_heatmap.html")
 
 
-for_map = Map(location=[1.42825, 103.84825], zoom_start=8, )
-hm_wide = HeatMap(
-    list(zip(for_map.latitude.values, for_map.longitude.values)),
-    min_opacity=0.2,
-    radius=17, 
-    blur=15, 
-    max_zoom=1,
-)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# import gmaps
-
-# api_key = "AIzaSyA2b3hxqyl1U5EnDp0RgaE4njUhkvxGqf0"
-# gmaps.configure(api_key=api_key)
-
-# fig = gmaps.figure()
-# fig.add_layer(gmaps.heatmap_layer(home_locations))
-# fig
-
-# fig = gmaps.figure()
-# fig.add_layer(gmaps.heatmap_layer(work_locations))
-# fig
-
-
-
-# Lon = np.arange(-71.21, -71, 0.0021) 
-# Lat = np.arange(42.189, 42.427, 0.00238) 
-
-
-# Straits of Singapore
-# 1.183374, 103.597561
-
-
-# Straits of Singapore
-# 1.312010, 104.128733
-
-
-
-# 1.568313, 104.073656
-
-# 1.434647, 103.515127
+fig1 = gmaps.figure()
+fig1.add_layer(gmaps.heatmap_layer(work_locations))
+fig1
+embed_minimal_html('work_heatmap.html', views=[fig1])
+IPython.display.HTML(filename="/content/work_heatmap.html")
