@@ -1,15 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Sep 16 09:20:04 2021
-
 @author: albardan
 """
-import sys
 import pandas as pd
-from math import cos, asin, sqrt, pi
 import matplotlib.pyplot as plt
-from collections import Counter
 
+from math import cos, asin, sqrt, pi 
 
 
 path = "pop_SG_sample_GT_disaggregated.csv" # MUST CHANGE TO DATASET PATH OR NAME
