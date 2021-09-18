@@ -8,4 +8,10 @@ I determined the location of the home as the location at which the agent was at 
 
 Note: I am having some problems with jupyter notebook, that's why I created this repository.
 
-You will find in this repository the script `code.py` 
+You will find in this repository the python script `code.py`, the csv dataframe file that I computed and used to infer the information `new_dataframe.csv` and few `png` files:
+1. distance from home to work (in km)
+2. time from home to work (in hours)
+3. start working time (in hours)
+4. end working time (in hours)
+5. heatmap of home locations in Singapore
+6. heatmap of work locations in Singapore
