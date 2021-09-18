@@ -149,7 +149,7 @@ home_locations = new_dataframe[["home_lat","home_lon"]]
 work_locations = new_dataframe[["work_lat","work_lon"]]
 work_locations.dropna(axis=0,inplace=True,how="any")
 
-api_key = "XXXXXXXXXXXXXXXXXXX" # my google api_key that I created to get access to Singapore map from google
+api_key = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" # my google api_key that I created to get access to Singapore map from google
 gmaps.configure(api_key=api_key)
 fig0 = gmaps.figure()
 fig0.add_layer(gmaps.heatmap_layer(home_locations))
