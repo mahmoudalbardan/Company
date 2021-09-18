@@ -7,3 +7,5 @@ From this dataset, I wanted to extract multiple features about two types of loca
 I determined the location of the home as the location at which the agent was at **0 O'clock** . I supposed that the working location of an agent is the one with the maximum duration outside its home.
 
 Note: I am having some problems with jupyter notebook, that's why I created this repository.
+
+You will find in this repository the script `code.py` 
