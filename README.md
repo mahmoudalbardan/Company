@@ -1,6 +1,6 @@
 # Company
 
-This is a an exploratory data analysis test presented to "Company" by Mahmoud Albardan. The idea is to analyse the mobility patterns for Singapore.
+This is a an exploratory data analysis test presented to "Company" by Mahmoud Albardan. The idea is to analyse the mobility patterns for city.
 To do so, I started with the dataset given by "Compnay" and containing multiple columns about subzones in agents, subzones and the time we detected  these agents in the subzones given precise information about latitude and longitude.
 
 From this dataset, I wanted to extract multiple features about two types of locations for each agent: the home and the work(or university if student, ect ..)
@@ -12,8 +12,8 @@ You will find in this repository the python script `code.py`, the csv dataframe 
 2. time from home to work (in hours)
 3. start working time (in hours)
 4. end working time (in hours)
-5. heatmap of home locations in Singapore
-6. heatmap of work locations in Singapore
+5. heatmap of home locations in city
+6. heatmap of work locations in city
 
 
 
