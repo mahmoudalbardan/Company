@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 from math import cos, asin, sqrt, pi 
 
 
-path = "pop_SG_sample_GT_disaggregated.csv" # MUST CHANGE TO DATASET PATH OR NAME
+path = "path_to_dataset" # MUST CHANGE TO DATASET PATH OR NAME
 dataframe = pd.read_csv(path)
 
 # check for nan values
