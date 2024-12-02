@@ -20,3 +20,25 @@ You will find in this repository the python script `code.py`, the csv dataframe 
 Notes: 
 1. I am having some problems with jupyter notebook, that's why I created this repository.
 2. I did not make an outlier detetion phase due to the time given to the test but it should be added. Outliers can be seen obviously in the histograms.
+
+
+
+# Types of Car Collisions and Their Percentages
+
+Car collisions can be categorized based on the nature of the crash. Below are the common types of collisions along with approximate percentage ranges (note: percentages vary by region, road conditions, and traffic patterns).
+(https://crashstats.nhtsa.dot.gov/#!/PublicationList/35)), page82
+
+
+## 1. Rear-End Collisions (29-38%)
+- **Description**: Occur when a vehicle crashes into the vehicle directly in front of it.
+- **Source**: [NHTSA Data][https://www.nhtsa.gov/]
+
+## 2. Side-Impact Collisions (T-Bone) (13-27%)
+- **Description**: Happen when the front of one vehicle crashes into the side of another.
+
+## 3. Head-On Collisions (2-10%)
+- **Description**: Involve the front ends of two vehicles colliding.
+
+## 4. Sideswipe Collisions (7-12%)
+- **Description**: Occur when the side of one vehicle scrapes or collides with the side of another.
+
